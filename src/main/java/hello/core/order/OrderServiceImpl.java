@@ -11,13 +11,30 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class OrderServiceImpl implements OrderService {
-    private final MemberRepository memberRepository;
+     private final MemberRepository memberRepository;
 //    private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
 //    private final DiscountPolicy discountPolicy = new RateDiscountPolicy();
-    private final DiscountPolicy discountPolicy;//인터페이스에만 의존, 구체화에 의존 x->NullPointExeption 발생 ->di
+     private final DiscountPolicy discountPolicy;//인터페이스에만 의존, 구체화에 의존 x->NullPointExeption 발생 ->di
+
+   /*set주입
+    @Autowired(required = false)
+    public void setMemberRepository(MemberRepository memberRepository) {
+        System.out.println("memberRepository = " + memberRepository);
+        this.memberRepository = memberRepository;
+    }
 
     @Autowired
+    public void setDiscountPolicy(DiscountPolicy discountPolicy) {
+        System.out.println("discountPolicy = " + discountPolicy);
+        this.discountPolicy = discountPolicy;
+    }*/
+
+    @Autowired//스프링도 스프링 빈에 등록하기 위해서는 먼저 OrderServiceImpl을 생성해서 등록해야한다
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        System.out.println("1.OrderServiceImpl");
+        System.out.println("1.memberRepository = " + memberRepository);
+        System.out.println("1.discountPolicy = " + discountPolicy);
+
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
