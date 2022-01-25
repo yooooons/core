@@ -9,6 +9,7 @@ import hello.core.member.MemberServiceImpl;
 import hello.core.member.MemoryMemberRepository;
 import hello.core.order.OrderService;
 import hello.core.order.OrderServiceImpl;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -29,21 +30,20 @@ public class  AppConfig {
     //AppConfig 를 보면 역할과 구현 클래스가 한눈에 들어온다. 애플리케이션 전체 구성이 어떻게 되어있는지 빠르게 파악할 수 있다.
     @Bean//스프링컨테이너에 등록된다
     public MemberService memberService() {
-        System.out.println("call AppConfig.memberService");
+//        System.out.println("call AppConfig.memberService");
         return new MemberServiceImpl(memberRepository());
     }
 
     @Bean
     public MemberRepository memberRepository() {
-        System.out.println("call AppConfig.memberRepository");
+//        System.out.println("call AppConfig.memberRepository");
         return new MemoryMemberRepository();
     }
 
     @Bean
     public OrderService orderService() {
-        System.out.println("callAppConfig.orderService");
-//        return new OrderServiceImpl(memberRepository(), discountPolicy());
-        return null;
+//        System.out.println("callAppConfig.orderService");
+        return new OrderServiceImpl(memberRepository(), discountPolicy());
     }
 
     @Bean

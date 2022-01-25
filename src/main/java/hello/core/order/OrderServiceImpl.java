@@ -1,5 +1,6 @@
 package hello.core.order;
 
+import hello.core.annotation.MainDiscountPolicy;
 import hello.core.discount.DiscountPolicy;
 import hello.core.discount.FixDiscountPolicy;
 import hello.core.discount.RateDiscountPolicy;
@@ -8,11 +9,12 @@ import hello.core.member.MemberRepository;
 import hello.core.member.MemoryMemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 
 @Component
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
     //구현체 말고 인터페이스에만 의존한다
      private final MemberRepository memberRepository;
@@ -33,16 +35,16 @@ public class OrderServiceImpl implements OrderService {
         this.discountPolicy = discountPolicy;
     }*/
 
-    /* 롬복사용
-    //@Autowired//스프링도 스프링 빈에 등록하기 위해서는 먼저 OrderServiceImpl을 생성해서 등록해야한다//생성자 하나면 생략가능
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+
+    @Autowired//스프링도 스프링 빈에 등록하기 위해서는 먼저 OrderServiceImpl을 생성해서 등록해야한다//생성자 하나면 생략가능
+    public OrderServiceImpl(MemberRepository memberRepository, @MainDiscountPolicy DiscountPolicy discountPolicy) {
         System.out.println("1.OrderServiceImpl");
         System.out.println("1.memberRepository = " + memberRepository);
         System.out.println("1.discountPolicy = " + discountPolicy);
 
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
-    }*/
+    }
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
