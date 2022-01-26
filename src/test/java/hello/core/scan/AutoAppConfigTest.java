@@ -11,9 +11,11 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class AutoAppConfigTest {
     @Test
     void basicScan() {
+        System.out.println(1);
         AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(AutoAppConfig.class);
-        
+        System.out.println(2);
         MemberService memberService = ac.getBean(MemberService.class);
+        System.out.println(3);
         Assertions.assertThat(memberService).isInstanceOf(MemberService.class);
 
         OrderServiceImpl bean = ac.getBean(OrderServiceImpl.class);
