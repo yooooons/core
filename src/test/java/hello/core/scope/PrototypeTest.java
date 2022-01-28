@@ -39,6 +39,7 @@ public class PrototypeTest {
     @Scope("prototype")
     //@Component가 없어도 된다. AnnotationConfigApplicationContext에 직접 지정해주면 클래스가 componentscan에 대상자체처럼 동작 해서 componentscan처럼 스프링 빈등록한다
     static class PrototypeBean {
+
         @PostConstruct
         public void init() {
             System.out.println("PrototypeBean.init");
